@@ -1,40 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>com.snackpub</groupId>
         <artifactId>snackSeata</artifactId>
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>snack-seata-order</artifactId>
+    <artifactId>snack-core-transaction</artifactId>
     <version>${snackpub.project.version}</version>
     <name>${project.artifactId}</name>
     <packaging>jar</packaging>
 
     <dependencies>
-        <!-- snack -->
+        <!-- Cloud-->
         <dependency>
-            <groupId>com.snackpub</groupId>
-            <artifactId>snack-core-boot</artifactId>
-            <version>${snackpub.project.version}</version>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-commons</artifactId>
         </dependency>
+        <!-- Seata-->
         <dependency>
-            <groupId>com.snackpub</groupId>
-            <artifactId>snack-core-launch</artifactId>
-            <version>${snackpub.project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.snackpub</groupId>
-            <artifactId>snack-core-transaction</artifactId>
-            <version>${snackpub.project.version}</version>
-        </dependency>
-        <!--Mybatis-->
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus</artifactId>
-            <version>${mybatis.plus.version}</version>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-seata</artifactId>
+            <version>${alibaba.cloud.version}</version>
         </dependency>
     </dependencies>
 
@@ -53,7 +44,6 @@
             </plugin>
         </plugins>
     </build>
-
 
 
 </project>

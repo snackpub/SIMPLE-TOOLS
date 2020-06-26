@@ -20,6 +20,12 @@
         <alibaba.cloud.version>2.2.1.RELEASE</alibaba.cloud.version>
         <alibaba.seata.version>1.2.0</alibaba.seata.version>
 
+        <swagger.version>2.9.2</swagger.version>
+        <swagger.models.version>1.5.21</swagger.models.version>
+        <knife4j.version>2.0.1</knife4j.version>
+        <protostuff.version>1.6.0</protostuff.version>
+        <spring.boot.admin.version>2.1.5</spring.boot.admin.version>
+
         <spring.cloud.version>Hoxton.SR2</spring.cloud.version>
 
 

@@ -1,6 +1,3 @@
-# snack-seata
-spring-cloud-alibaba-seata 分布式事务 sample
-
 -- 创建 order库、业务表、undo_log表
 create database seata_order;
 use seata_order;

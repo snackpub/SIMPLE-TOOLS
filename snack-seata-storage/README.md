@@ -1,18 +1,14 @@
-# snack-seata
-spring-cloud-alibaba-seata 分布式事务 sample
+-- 创建 storage库、业务表、undo_log表
+create database seata_storage;
+use seata_storage;
 
--- 创建 order库、业务表、undo_log表
-create database seata_order;
-use seata_order;
-
-DROP TABLE IF EXISTS `tb_order`;
-CREATE TABLE `tb_order` (
+DROP TABLE IF EXISTS `tb_storage`;
+CREATE TABLE `tb_storage` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` varchar(255) DEFAULT NULL,
   `commodity_code` varchar(255) DEFAULT NULL,
   `count` int(11) DEFAULT 0,
-  `money` int(11) DEFAULT 0,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY (`commodity_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `undo_log`
@@ -31,3 +27,7 @@ CREATE TABLE `undo_log`
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 1
   DEFAULT CHARSET = utf8;
+
+-- 初始化库存模拟数据
+INSERT INTO seata_storage.tb_storage (id, commodity_code, count) VALUES (1, 'product-1', 9999999);
+INSERT INTO seata_storage.tb_storage (id, commodity_code, count) VALUES (2, 'product-2', 0);
