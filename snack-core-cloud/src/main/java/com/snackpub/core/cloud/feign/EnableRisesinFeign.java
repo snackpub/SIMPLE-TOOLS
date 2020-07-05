@@ -17,7 +17,7 @@
 package com.snackpub.core.cloud.feign;
 
 
-import com.snackpub.core.cloud.constant.AppConstant;
+import com.snackpub.core.launch.constant.AppConstant;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 import java.lang.annotation.*;

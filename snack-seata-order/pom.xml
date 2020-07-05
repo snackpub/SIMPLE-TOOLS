@@ -22,11 +22,6 @@
         </dependency>
         <dependency>
             <groupId>com.snackpub</groupId>
-            <artifactId>snack-core-launch</artifactId>
-            <version>${snackpub.project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.snackpub</groupId>
             <artifactId>snack-core-transaction</artifactId>
             <version>${snackpub.project.version}</version>
         </dependency>
@@ -40,6 +35,17 @@
 
     <build>
         <finalName>${project.name}</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -53,7 +59,6 @@
             </plugin>
         </plugins>
     </build>
-
 
 
 </project>

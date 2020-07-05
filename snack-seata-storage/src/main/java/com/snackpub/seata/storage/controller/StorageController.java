@@ -1,6 +1,6 @@
-package com.snack.seata.storage.controller;
+package com.snackpub.seata.storage.controller;
 
-import com.snack.seata.storage.service.IStorageService;
+import com.snackpub.seata.storage.service.IStorageService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

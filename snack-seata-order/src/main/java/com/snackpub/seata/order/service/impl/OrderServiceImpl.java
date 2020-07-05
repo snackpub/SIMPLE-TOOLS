@@ -1,12 +1,13 @@
 package com.snackpub.seata.order.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.google.protobuf.ServiceException;
 import com.snackpub.seata.order.entity.Order;
+import com.snackpub.seata.order.feign.IStorageClient;
 import com.snackpub.seata.order.mapper.OrderMapper;
 import com.snackpub.seata.order.service.IOrderService;
 import io.seata.spring.annotation.GlobalTransactional;
 import lombok.AllArgsConstructor;
-import org.springblade.core.log.exception.ServiceException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,7 +27,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 	@Override
 	@GlobalTransactional
 	@Transactional(rollbackFor = Exception.class)
-	public boolean createOrder(String userId, String commodityCode, Integer count) {
+	public boolean createOrder(String userId, String commodityCode, Integer count) throws ServiceException {
 		int maxCount = 100;
 		BigDecimal orderMoney = new BigDecimal(count).multiply(new BigDecimal(5));
 		Order order = new Order()

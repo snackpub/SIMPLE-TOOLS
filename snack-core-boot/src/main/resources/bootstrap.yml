@@ -60,7 +60,7 @@ spring:
 
 #配置日志地址
 logging:
-  config: classpath:log/logback_prod.xml
+  config: classpath:log/logback_${snackpub.env}.xml
 
 # mybatis
 mybatis-plus:

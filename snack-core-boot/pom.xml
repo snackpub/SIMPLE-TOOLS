@@ -21,11 +21,6 @@
         <!-- snack -->
         <dependency>
             <groupId>com.snackpub</groupId>
-            <artifactId>snack-core-launch</artifactId>
-            <version>${snackpub.project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.snackpub</groupId>
             <artifactId>snack-core-cloud</artifactId>
             <version>${snackpub.project.version}</version>
         </dependency>

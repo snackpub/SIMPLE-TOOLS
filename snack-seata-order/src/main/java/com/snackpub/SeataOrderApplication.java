@@ -1,4 +1,4 @@
-package com.snackpub.seata.order;
+package com.snackpub;
 
 import com.snackpub.core.launch.SnackPubApplication;
 import com.snackpub.core.launch.constant.AppConstant;
@@ -15,7 +15,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 public class SeataOrderApplication {
 
     public static void main(String[] args) {
-        SnackPubApplication.run("snack-seata-storage", SeataOrderApplication.class, args);
+        SnackPubApplication.run("snack-seata-order", SeataOrderApplication.class, args);
     }
 
 }

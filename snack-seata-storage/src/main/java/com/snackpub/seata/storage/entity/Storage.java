@@ -1,4 +1,4 @@
-package com.snack.seata.storage.entity;
+package com.snackpub.seata.storage.entity;
 
 
 import com.baomidou.mybatisplus.annotation.TableName;

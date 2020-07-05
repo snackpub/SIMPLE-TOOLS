@@ -1,10 +1,6 @@
 package com.snackpub.mp.plugins;
 
-import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
-import com.baomidou.mybatisplus.core.toolkit.PluginUtils;
-import com.baomidou.mybatisplus.core.toolkit.StringPool;
-import com.baomidou.mybatisplus.core.toolkit.SystemClock;
-import com.snackpub.tools.SnackUtils;
+import com.baomidou.mybatisplus.core.toolkit.*;
 import org.apache.ibatis.executor.statement.StatementHandler;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.plugin.*;
@@ -123,7 +119,7 @@ public class SqlLogInterceptor implements Interceptor {
         MappedStatement ms = (MappedStatement) metaObject.getValue("delegate.mappedStatement");
         // 打印 sql
         System.err.println(
-                SnackUtils.format(
+                StringUtils.format(
                         "\n==============  Sql Start  ==============" +
                                 "\nExecute ID  ：{}" +
                                 "\nExecute SQL ：{}" +

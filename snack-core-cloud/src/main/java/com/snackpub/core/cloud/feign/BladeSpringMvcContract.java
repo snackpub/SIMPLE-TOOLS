@@ -19,6 +19,7 @@ import com.alibaba.csp.sentinel.util.StringUtil;
 import com.snackpub.core.cloud.annotation.ApiVersion;
 import com.snackpub.core.cloud.annotation.UrlVersion;
 import com.snackpub.core.cloud.version.BladeMediaType;
+import com.snackpub.core.tools.utils.StringPool;
 import feign.MethodMetadata;
 import org.springframework.cloud.openfeign.AnnotatedParameterProcessor;
 import org.springframework.cloud.openfeign.support.SpringMvcContract;

@@ -13,12 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.snack.seata.storage;
+package com.snackpub;
 
-import com.snackpub.core.cloud.constant.AppConstant;
-import org.springblade.core.launch.BladeApplication;
-import org.springblade.core.launch.constant.AppConstant;
-import org.springblade.core.transaction.annotation.SeataCloudApplication;
+import com.snackpub.core.launch.SnackPubApplication;
+import com.snackpub.core.launch.constant.AppConstant;
+import com.snackpub.core.transaction.annotation.SeataCloudApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 /**
@@ -31,7 +30,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 public class SeataStorageApplication {
 
 	public static void main(String[] args) {
-		BladeApplication.run("blade-seata-storage", SeataStorageApplication.class, args);
+		SnackPubApplication.run("snack-seata-storage", SeataStorageApplication.class, args);
 	}
 
 }

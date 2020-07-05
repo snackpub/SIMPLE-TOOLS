@@ -15,7 +15,19 @@
  */
 package com.snackpub.core.transaction.config;
 
+import com.alibaba.druid.pool.DruidDataSource;
+import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
+import io.seata.rm.datasource.DataSourceProxy;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.core.io.support.ResourcePatternResolver;
+
+import javax.sql.DataSource;
 
 /**
  * 分布式事务数据源配置
@@ -24,5 +36,43 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class DataSourceConfiguration {
+    public DataSourceConfiguration() {
+    }
 
+    @Bean(
+            name = {"sqlSessionFactory"}
+    )
+    public SqlSessionFactory sqlSessionFactoryBean(DataSourceProxy dataSourceProxy) throws Exception {
+        MybatisSqlSessionFactoryBean bean = new MybatisSqlSessionFactoryBean();
+        bean.setDataSource(dataSourceProxy);
+        ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+        bean.setMapperLocations(resolver.getResources("classpath:com/snackpub/**/mapper/*Mapper.xml"));
+        SqlSessionFactory factory = null;
+
+        try {
+            factory = bean.getObject();
+            return factory;
+        } catch (Exception var6) {
+            throw new RuntimeException(var6);
+        }
+    }
+
+    @Bean
+    public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) {
+        return new SqlSessionTemplate(sqlSessionFactory);
+    }
+
+    @Bean
+    @ConfigurationProperties(
+            prefix = "spring.datasource"
+    )
+    public DruidDataSource druidDataSource() {
+        return new DruidDataSource();
+    }
+
+    @Primary
+    @Bean({"dataSource"})
+    public DataSourceProxy dataSourceProxy(DataSource druidDataSource) {
+        return new DataSourceProxy(druidDataSource);
+    }
 }

@@ -1,10 +1,10 @@
-package com.snack.seata.storage.service.impl;
+package com.snackpub.seata.storage.service.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.snack.seata.storage.service.IStorageService;
-import com.snack.seata.storage.entity.Storage;
-import com.snack.seata.storage.mapper.StorageMapper;
+import com.snackpub.seata.storage.service.IStorageService;
+import com.snackpub.seata.storage.entity.Storage;
+import com.snackpub.seata.storage.mapper.StorageMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

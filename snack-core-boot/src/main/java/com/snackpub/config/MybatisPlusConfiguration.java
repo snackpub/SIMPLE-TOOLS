@@ -16,6 +16,7 @@
 package com.snackpub.config;
 
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
+import com.snackpub.core.launch.constant.AppConstant;
 import com.snackpub.mp.plugins.SqlLogInterceptor;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.annotation.MapperScan;
@@ -23,6 +24,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 /**
  * mybatisplus 配置
@@ -40,6 +42,7 @@ public class MybatisPlusConfiguration {
 
 
     @Bean
+    @Profile({AppConstant.DEV_CODE, AppConstant.TEST_CODE})
     @ConditionalOnMissingBean(PaginationInterceptor.class)
     public PaginationInterceptor paginationInterceptor() {
         return new PaginationInterceptor();

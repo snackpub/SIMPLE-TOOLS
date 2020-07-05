@@ -1,7 +1,7 @@
-package com.snack.seata.storage.service;
+package com.snackpub.seata.storage.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.snack.seata.storage.entity.Storage;
+import com.snackpub.seata.storage.entity.Storage;
 
 /**
  * IStorageService
