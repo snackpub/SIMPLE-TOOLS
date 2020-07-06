@@ -2,7 +2,7 @@ package com.snackpub;
 
 import com.snackpub.core.launch.SnackPubApplication;
 import com.snackpub.core.launch.constant.AppConstant;
-import com.snackpub.core.transaction.annotation.SeataCloudApplication;
+import com.snackpub.transaction.annotation.SeataCloudApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 /**

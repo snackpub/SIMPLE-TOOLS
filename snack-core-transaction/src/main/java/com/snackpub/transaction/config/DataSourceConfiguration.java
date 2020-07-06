@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.snackpub.core.transaction.config;
+package com.snackpub.transaction.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
@@ -36,43 +36,43 @@ import javax.sql.DataSource;
  */
 @Configuration
 public class DataSourceConfiguration {
-    public DataSourceConfiguration() {
-    }
-
-    @Bean(
-            name = {"sqlSessionFactory"}
-    )
-    public SqlSessionFactory sqlSessionFactoryBean(DataSourceProxy dataSourceProxy) throws Exception {
-        MybatisSqlSessionFactoryBean bean = new MybatisSqlSessionFactoryBean();
-        bean.setDataSource(dataSourceProxy);
-        ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        bean.setMapperLocations(resolver.getResources("classpath:com/snackpub/**/mapper/*Mapper.xml"));
-        SqlSessionFactory factory = null;
-
-        try {
-            factory = bean.getObject();
-            return factory;
-        } catch (Exception var6) {
-            throw new RuntimeException(var6);
-        }
-    }
-
-    @Bean
-    public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) {
-        return new SqlSessionTemplate(sqlSessionFactory);
-    }
-
-    @Bean
-    @ConfigurationProperties(
-            prefix = "spring.datasource"
-    )
-    public DruidDataSource druidDataSource() {
-        return new DruidDataSource();
-    }
-
-    @Primary
-    @Bean({"dataSource"})
-    public DataSourceProxy dataSourceProxy(DataSource druidDataSource) {
-        return new DataSourceProxy(druidDataSource);
-    }
+//    public DataSourceConfiguration() {
+//    }
+//
+//    @Bean(
+//            name = {"sqlSessionFactory"}
+//    )
+//    public SqlSessionFactory sqlSessionFactoryBean(DataSourceProxy dataSourceProxy) throws Exception {
+//        MybatisSqlSessionFactoryBean bean = new MybatisSqlSessionFactoryBean();
+//        bean.setDataSource(dataSourceProxy);
+//        ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+//        bean.setMapperLocations(resolver.getResources("classpath:com/snackpub/**/mapper/*Mapper.xml"));
+//        SqlSessionFactory factory = null;
+//
+//        try {
+//            factory = bean.getObject();
+//            return factory;
+//        } catch (Exception var6) {
+//            throw new RuntimeException(var6);
+//        }
+//    }
+//
+//    @Bean
+//    public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) {
+//        return new SqlSessionTemplate(sqlSessionFactory);
+//    }
+//
+//    @Bean
+//    @ConfigurationProperties(
+//            prefix = "spring.datasource"
+//    )
+//    public DruidDataSource druidDataSource() {
+//        return new DruidDataSource();
+//    }
+//
+//    @Primary
+//    @Bean({"dataSource"})
+//    public DataSourceProxy dataSourceProxy(DataSource druidDataSource) {
+//        return new DataSourceProxy(druidDataSource);
+//    }
 }
