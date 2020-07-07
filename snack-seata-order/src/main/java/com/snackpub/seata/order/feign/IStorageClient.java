@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  *
  * @author Chill
  */
-@FeignClient(name = "blade-seata-storage", fallback = StorageClientFallback.class)
+@FeignClient(name = "snack-seata-storage", fallback = StorageClientFallback.class)
 public interface IStorageClient {
 
 	/**

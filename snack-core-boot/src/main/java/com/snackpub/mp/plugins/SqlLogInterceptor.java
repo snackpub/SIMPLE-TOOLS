@@ -1,6 +1,8 @@
 package com.snackpub.mp.plugins;
 
 import com.baomidou.mybatisplus.core.toolkit.*;
+import com.snackpub.core.tools.utils.StringUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.executor.statement.StatementHandler;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.plugin.*;
@@ -19,14 +21,13 @@ import java.util.*;
  * @author hubin nieqiurong TaoYu
  * @since 2016-07-07
  */
+@Slf4j
 @Intercepts({
         @Signature(type = StatementHandler.class, method = "query", args = {Statement.class, ResultHandler.class}),
         @Signature(type = StatementHandler.class, method = "update", args = Statement.class),
         @Signature(type = StatementHandler.class, method = "batch", args = Statement.class)
 })
 public class SqlLogInterceptor implements Interceptor {
-
-
     private static final String DRUID_POOLED_PREPARED_STATEMENT = "com.alibaba.druid.pool.DruidPooledPreparedStatement";
     private static final String T4C_PREPARED_STATEMENT = "oracle.jdbc.driver.T4CPreparedStatement";
     private static final String ORACLE_PREPARED_STATEMENT_WRAPPER = "oracle.jdbc.driver.OraclePreparedStatementWrapper";
@@ -119,7 +120,7 @@ public class SqlLogInterceptor implements Interceptor {
         MappedStatement ms = (MappedStatement) metaObject.getValue("delegate.mappedStatement");
         // 打印 sql
         System.err.println(
-                StringUtils.format(
+                StringUtil.format(
                         "\n==============  Sql Start  ==============" +
                                 "\nExecute ID  ：{}" +
                                 "\nExecute SQL ：{}" +

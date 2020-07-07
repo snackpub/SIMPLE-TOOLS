@@ -42,7 +42,6 @@ public class MybatisPlusConfiguration {
 
 
     @Bean
-    @Profile({AppConstant.DEV_CODE, AppConstant.TEST_CODE})
     @ConditionalOnMissingBean(PaginationInterceptor.class)
     public PaginationInterceptor paginationInterceptor() {
         return new PaginationInterceptor();
@@ -54,7 +53,7 @@ public class MybatisPlusConfiguration {
      * @return SqlLogInterceptor
      */
     @Bean
-    @ConditionalOnProperty(value = "snackpub.mybatis-plus.sql-log.enable", matchIfMissing = true)
+    @ConditionalOnProperty(value = "snack.mybatis-plus.sql-log", matchIfMissing = true)
     public SqlLogInterceptor sqlLogInterceptor() {
         return new SqlLogInterceptor();
     }
