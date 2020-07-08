@@ -64,4 +64,8 @@ CREATE TABLE `undo_log`
 
 -- 初始化库存模拟数据
 INSERT INTO seata_storage.tb_storage (id, commodity_code, count) VALUES (1, 'product-1', 9999999);
-INSERT INTO seat
+INSERT INTO seata_storage.tb_storage (id, commodity_code, count) VALUES (2, 'product-2', 0);
+
+## 如何定义分布式事务？
+
+我们说，分布式事务是由一批分支事务组成的全局事务，通常分支事务只是本地事务。

@@ -1,5 +1,6 @@
 package com.snackpub.mp.plugins;
 
+import com.alibaba.druid.proxy.jdbc.PreparedStatementProxy;
 import com.baomidou.mybatisplus.core.toolkit.*;
 import com.snackpub.core.tools.utils.StringUtil;
 import lombok.extern.slf4j.Slf4j;
