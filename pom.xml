@@ -14,7 +14,6 @@
 
         <java.version>1.8</java.version>
         <maven.plugin.version>3.8.1</maven.plugin.version>
-        <spring.boot.version>2.3.1.RELEASE</spring.boot.version>
         <spring.platform.version>Cairo-SR8</spring.platform.version>
         <mybatis.plus.version>3.3.1</mybatis.plus.version>
         <alibaba.cloud.version>2.2.1.RELEASE</alibaba.cloud.version>
@@ -26,6 +25,7 @@
         <protostuff.version>1.6.0</protostuff.version>
         <spring.boot.admin.version>2.1.5</spring.boot.admin.version>
 
+        <spring.boot.version>2.3.1.RELEASE</spring.boot.version>
         <spring.cloud.version>Hoxton.SR2</spring.cloud.version>
 
 

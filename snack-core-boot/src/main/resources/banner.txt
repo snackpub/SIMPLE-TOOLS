@@ -1,0 +1,11 @@
+${AnsiColor.BRIGHT_CYAN}  _____            _              ${AnsiColor.BLUE}  _____                  _
+${AnsiColor.BRIGHT_CYAN} / ____|          (_)             ${AnsiColor.BLUE} / ____|                | |
+${AnsiColor.BRIGHT_CYAN}| (___  _ __  _ __ _ _ __   __ _  ${AnsiColor.BLUE}| (___  _ __   __ _  ___| | _
+${AnsiColor.BRIGHT_CYAN} \___ \| '_ \| '__| | '_ \ / _` | ${AnsiColor.BLUE} \___ \| '_ \ / _` |/ __| |/ /
+${AnsiColor.BRIGHT_CYAN} ____) | |_) | |  | | | | | (_| | ${AnsiColor.BLUE} ____) | | | | (_| | (__|   <
+${AnsiColor.BRIGHT_CYAN}|_____/| .__/|_|  |_|_| |_|\__, | ${AnsiColor.BLUE}|_____/|_| |_|\__,_|\___|_|\_\
+${AnsiColor.BRIGHT_CYAN}       | |                  __/ |
+${AnsiColor.BRIGHT_CYAN}       |_|                 |___/
+
+${AnsiColor.BLUE} :: SpringSnack :: ${spring.application.name}:${AnsiColor.RED}${snackpub.env}${AnsiColor.BLUE} :: Running SpringBoot ${spring-boot.version} :: ${AnsiColor.BRIGHT_BLACK}
+
