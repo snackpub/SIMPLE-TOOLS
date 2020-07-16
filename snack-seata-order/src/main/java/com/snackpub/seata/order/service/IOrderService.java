@@ -11,14 +11,16 @@ import com.snackpub.seata.order.entity.Order;
  */
 public interface IOrderService extends IService<Order> {
 
-	/**
-	 * 创建订单
-	 *
-	 * @param userId        用户id
-	 * @param commodityCode 商品代码
-	 * @param count         数量
-	 * @return boolean
-	 */
-	boolean createOrder(String userId, String commodityCode, Integer count) throws ServiceException;
+    /**
+     * 创建订单
+     *
+     * @param userId        用户id
+     * @param commodityCode 商品代码
+     * @param count         数量
+     * @return boolean
+     */
+    boolean createOrder(String userId, String commodityCode, Integer count) throws ServiceException;
+
+
 
 }

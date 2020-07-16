@@ -1,0 +1,40 @@
+#服务器端口
+server:
+  port: 8503
+
+#数据源配置
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/seata-bankaccount?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true&allowPublicKeyRetrieval=true
+    username: root
+    password: snackpub
+  # Zipkin
+  zipkin:
+    base-url: http://localhost:9411 # Zipkin服务器的地址,向zipkin-server上报调用信息
+  sleuth:
+    sampler:
+      probability: 1.0 #将采样比例设置为1.0，也就是全部都需要。
+
+# seata配置
+seata:
+  #registry:
+  #  type: nacos
+  #  nacos:
+  #    server-addr: localhost
+  #config:
+  #  type: nacos
+  #  nacos:
+  #    server-addr: localhost
+  tx-service-group: snack-seata-bank-group
+  service:
+    grouplist:  # TC服务列表  仅注册中心为file时使用
+      default: 127.0.0.1:8091
+    vgroup-mapping: # 事务群组
+      snack-seata-bank-group: default #snack-seata-storage-group为分组，配置项值为TC集群名
+    disable-global-transaction: false # 全局事务开关 默认false。false为开启，true为关闭
+  client:
+    rm:
+      report-success-enable: false #是否上报一阶段成功 true、false，从1.1.0版本开始,默认false.true用于保持分支事务生命周期记录完整，false可提高不少性能
+  enabled: true # 是否开启spring-boot自动装配 true、false,(SSBS)专有配置，默认true
+
+# https://seata.io/zh-cn/docs/user/configurations.html  seata 详细配置

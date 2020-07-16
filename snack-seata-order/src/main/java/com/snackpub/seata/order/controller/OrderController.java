@@ -1,6 +1,7 @@
 package com.snackpub.seata.order.controller;
 
 import com.snackpub.core.tools.api.R;
+import com.snackpub.seata.order.entity.Order;
 import com.snackpub.seata.order.service.IOrderService;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
