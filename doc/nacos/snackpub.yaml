@@ -7,6 +7,12 @@ server:
 
 #spring
 spring:
+  # Zipkin
+  zipkin:
+    base-url: http://localhost:9411 # Zipkin服务器的地址,向zipkin-server上报调用信息
+  sleuth:
+    sampler:
+      probability: 1.0 #将采样比例设置为1.0，也就是全部都需要。
   devtools:
     restart:
       log-condition-evaluation-delta: false
@@ -54,25 +60,3 @@ management:
   endpoint:
     health:
       show-details: always
-
-#blade
-snackpub:
-  xss:
-    enable: true
-    skip-url:
-      - /weixin
-  secure:
-    skip-url:
-      - /test/**
-    client:
-      - client-id: sword
-        path-patterns:
-          - /sword/**
-      - client-id: saber
-        path-patterns:
-          - /saber/**
-  tenant:
-    column: tenant_id
-    tables:
-      - blade_notice
-

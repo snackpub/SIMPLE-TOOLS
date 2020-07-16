@@ -8,12 +8,12 @@ spring:
     url: jdbc:mysql://localhost:3306/seata-bankaccount?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true&allowPublicKeyRetrieval=true
     username: root
     password: snackpub
-  # Zipkin
-  zipkin:
-    base-url: http://localhost:9411 # Zipkin服务器的地址,向zipkin-server上报调用信息
-  sleuth:
-    sampler:
-      probability: 1.0 #将采样比例设置为1.0，也就是全部都需要。
+#  # Zipkin
+#  zipkin:
+#    base-url: http://localhost:9411 # Zipkin服务器的地址,向zipkin-server上报调用信息
+#  sleuth:
+#    sampler:
+#      probability: 1.0 #将采样比例设置为1.0，也就是全部都需要。
 
 # seata配置
 seata:
