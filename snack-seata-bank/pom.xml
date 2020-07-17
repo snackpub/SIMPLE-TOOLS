@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.snackpub</groupId>
+        <artifactId>snackSeata</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>snack-seata-bank</artifactId>
+    <version>${snackpub.project.version}</version>
+    <name>${project.artifactId}</name>
+    <packaging>jar</packaging>
+    <description>账户余额服务</description>
+
+    <dependencies>
+        <!-- snack -->
+        <dependency>
+            <groupId>com.snackpub</groupId>
+            <artifactId>snack-core-boot</artifactId>
+            <version>${snackpub.project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.snackpub</groupId>
+            <artifactId>snack-core-transaction</artifactId>
+            <version>${snackpub.project.version}</version>
+        </dependency>
+        <!--Mybatis-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus</artifactId>
+            <version>${mybatis.plus.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>${project.name}</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.plugin.version}</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
