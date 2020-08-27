@@ -15,7 +15,12 @@ spring:
 #    sampler:
 #      probability: 1.0 #将采样比例设置为1.0，也就是全部都需要。
 
-
+  rabbitmq:
+    addresses: localhost:5672
+    username: guest
+    password: guest
+    virtual-host: /
+    connection-timeout: 15000
 
 ribbon:
   ConnectTimeout: 60000 # 连接超时时间(ms)

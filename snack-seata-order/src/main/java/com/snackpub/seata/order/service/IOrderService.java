@@ -21,6 +21,15 @@ public interface IOrderService extends IService<Order> {
      */
     boolean createOrder(String userId, String commodityCode, Integer count) throws ServiceException;
 
+    /**
+     * 创建订单保存到mq
+     *
+     * @param userId        用户id
+     * @param commodityCode 商品代码
+     * @param count         数量
+     * @return boolean
+     */
+    void createOrderSendMq(String userId, String commodityCode, Integer count) throws ServiceException;
 
 
 }

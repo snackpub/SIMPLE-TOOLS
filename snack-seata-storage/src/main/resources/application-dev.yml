@@ -15,6 +15,24 @@ spring:
 #    sampler:
 #      probability: 1.0 #将采样比例设置为1.0，也就是全部都需要。
 
+   # Rabbit MQ
+  rabbitmq:
+    addresses: localhost:5672
+    username: guest
+    password: guest
+    virtual-host: /
+    connection-timeout: 15000
+    listener:
+      simple:
+        acknowledge-mode: manual
+        concurrency: 5
+        max-concurrency: 10
+    publisher-returns: true
+    template:
+      mandatory: true
+    publisher-confirms: true
+
+
 # seata配置
 seata:
   #registry:

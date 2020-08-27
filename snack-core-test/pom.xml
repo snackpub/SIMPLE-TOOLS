@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.snackpub</groupId>
+        <artifactId>snackSeata</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>snack-core-test</artifactId>
+    <version>${snackpub.project.version}</version>
+    <name>${project.artifactId}</name>
+    <packaging>jar</packaging>
+    <description>测试模块</description>
+
+
+    <dependencies>
+        <!-- SnackPub -->
+        <dependency>
+            <groupId>com.snackpub</groupId>
+            <artifactId>core-launch</artifactId>
+            <version>${snackpub.project.version}</version>
+        </dependency>
+        <!-- Test -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>

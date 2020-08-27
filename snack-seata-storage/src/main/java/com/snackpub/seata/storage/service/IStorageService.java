@@ -19,4 +19,13 @@ public interface IStorageService extends IService<Storage> {
 	 */
 	int deduct(String commodityCode, int count);
 
+
+
+	/**
+	 * 减库存
+	 *
+	 * @param jsonOrder 商品代码
+	 */
+	void deduct2(String jsonOrder);
+
 }

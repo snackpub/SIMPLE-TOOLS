@@ -27,6 +27,11 @@
             <artifactId>snack-core-transaction</artifactId>
             <version>${snackpub.project.version}</version>
         </dependency>
+        <!-- Rabbit mq -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
         <!--Mybatis-->
         <dependency>
             <groupId>com.baomidou</groupId>

@@ -1,5 +1,6 @@
 package com.snackpub.seata.order.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.protobuf.ServiceException;
 import com.snackpub.seata.order.entity.Order;
@@ -9,6 +10,8 @@ import com.snackpub.seata.order.mapper.OrderMapper;
 import com.snackpub.seata.order.service.IOrderService;
 import io.seata.spring.annotation.GlobalTransactional;
 import lombok.AllArgsConstructor;
+import lombok.SneakyThrows;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +28,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
     private IStorageClient storageClient;
     private IBankClient bankClient;
+    private RabbitTemplate rabbitTemplate;
 
     @Override
     @GlobalTransactional
@@ -39,7 +43,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
                 .setMoney(orderMoney);
         int cnt1 = baseMapper.insert(order);
         int cnt2 = storageClient.deduct(commodityCode, count);
-        int cnt3 = bankClient.deduct(userId, orderMoney,order.getId().longValue());
+        int cnt3 = bankClient.deduct(userId, orderMoney, order.getId().longValue());
         if (cnt2 < 0) {
             throw new ServiceException("创建订单失败");
         } else if (count > maxCount) {
@@ -49,4 +53,20 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         }
         return cnt1 > 0 && cnt2 > 0 && cnt3 > 0;
     }
+
+
+    @SneakyThrows
+    @Override
+    public void createOrderSendMq(String userId, String commodityCode, Integer count) {
+        BigDecimal orderMoney = new BigDecimal(count).multiply(new BigDecimal(5));
+        Order order = new Order()
+                .setUserId(userId)
+                .setCommodityCode(commodityCode)
+                .setCount(count)
+                .setMoney(orderMoney);
+        for (int i = 0; i < 100; i++) {
+            rabbitTemplate.convertAndSend("queue.topic", JSON.toJSONString(order));
+        }
+    }
+
 }
