@@ -26,4 +26,11 @@ public class HelloSender {
     public void topicMessagesSend() {
         amqpTemplate.convertAndSend("exchange", "topic.messages", "hello,rabbit~~22");
     }
+
+
+    public void send2() {
+        amqpTemplate.convertAndSend("delay-queue", "{hello,word}");
+    }
+
+
 }

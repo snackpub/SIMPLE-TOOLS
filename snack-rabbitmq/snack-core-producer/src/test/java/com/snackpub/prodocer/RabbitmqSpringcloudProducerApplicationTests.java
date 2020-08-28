@@ -60,6 +60,12 @@ public class RabbitmqSpringcloudProducerApplicationTests extends BladeBaseTest {
         System.err.println("推送成功！");
     }
 
+    @SneakyThrows
+    @Test
+    public void testSender6() {
+        helloSender.send2();
+        System.err.println("推送成功！");
+    }
 
 
 }
