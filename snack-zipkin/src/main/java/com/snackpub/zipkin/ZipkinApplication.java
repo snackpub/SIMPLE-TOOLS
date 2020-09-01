@@ -1,4 +1,4 @@
-package com.snack.zipkin;
+package com.snackpub.zipkin;
 
 import com.snackpub.core.launch.SnackPubApplication;
 import org.springframework.cloud.client.SpringCloudApplication;

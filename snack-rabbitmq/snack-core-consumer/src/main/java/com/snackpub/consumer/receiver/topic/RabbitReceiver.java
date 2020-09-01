@@ -1,7 +1,7 @@
 package com.snackpub.consumer.receiver.topic;
 
 import com.rabbitmq.client.Channel;
-import com.snack.common.model.Order;
+import com.snackpub.common.model.Order;
 import org.springframework.amqp.rabbit.annotation.*;
 import org.springframework.amqp.support.AmqpHeaders;
 import org.springframework.messaging.Message;
@@ -14,7 +14,9 @@ import java.util.Map;
 @Component
 public class RabbitReceiver {
 
-   
+   /**
+    * @Queue(durable=true) 队列持久化，RabbitMQ重启之后，持久化的队列也会存在，并会保持和重启前一致的队列参数
+    */
    @RabbitListener(bindings = @QueueBinding(
          value = @Queue(value = "queue-1", durable="true"),
          exchange = @Exchange(value = "exchange-1", durable="true", type= "topic", ignoreDeclarationExceptions = "true"),

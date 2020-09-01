@@ -18,3 +18,10 @@ seata 典型的生命周期：
 3. RM将本地事务注册为XID到TC的相应全局事务的分支。
 4. TM要求TC提交或回滚XID的相应全局事务。
 5. TC驱动相应的XID全局事务下的所有分支事务以完成分支提交或回滚。
+
+
+
+Rabbit MQ
+
+start: rabbitmq-plugins enable rabbitmq_management
+url: http://localhost:15672/#/

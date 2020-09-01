@@ -26,6 +26,6 @@ public interface IStorageService extends IService<Storage> {
 	 *
 	 * @param jsonOrder 商品代码
 	 */
-	void deduct2(String jsonOrder);
+//	void deduct2(String jsonOrder);
 
 }

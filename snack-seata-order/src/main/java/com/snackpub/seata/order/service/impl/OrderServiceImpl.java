@@ -11,9 +11,11 @@ import com.snackpub.seata.order.service.IOrderService;
 import io.seata.spring.annotation.GlobalTransactional;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
+import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.amqp.rabbit.core.RabbitTemplate.ReturnCallback;
 
 import java.math.BigDecimal;
 
@@ -55,17 +57,33 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
     }
 
 
+    final ReturnCallback returnCallback = (message, replyCode, replyText, exchange, routingKey) -> {
+        System.err.println("return exchange: " + exchange + ", routingKey: "
+                + routingKey + ", replyCode: " + replyCode + ", replyText: " + replyText);
+    };
+
+    final RabbitTemplate.ConfirmCallback confirmCallback = (correlationData, ack, cause) -> {
+        System.err.println("correlationData: " + correlationData);
+        System.err.println("ack: " + ack);
+        if (!ack) {
+            System.err.println("异常处理....");
+        }
+    };
+
     @SneakyThrows
     @Override
     public void createOrderSendMq(String userId, String commodityCode, Integer count) {
+        rabbitTemplate.setConfirmCallback(confirmCallback);
+        rabbitTemplate.setReturnCallback(returnCallback);
         BigDecimal orderMoney = new BigDecimal(count).multiply(new BigDecimal(5));
         Order order = new Order()
                 .setUserId(userId)
                 .setCommodityCode(commodityCode)
                 .setCount(count)
                 .setMoney(orderMoney);
+        CorrelationData correlationData = new CorrelationData("123456789");
         for (int i = 0; i < 100; i++) {
-            rabbitTemplate.convertAndSend("queue.topic", JSON.toJSONString(order));
+            rabbitTemplate.convertAndSend("exchange-3", "order.credef", JSON.toJSONString(order), correlationData);
         }
     }
 

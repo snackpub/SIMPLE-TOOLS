@@ -16,7 +16,7 @@
     <description>Rabbitmq</description>
 
     <modules>
-        <module>snack-common</module>
+        <module>snack-core-common</module>
         <module>snack-core-consumer</module>
         <module>snack-core-producer</module>
     </modules>

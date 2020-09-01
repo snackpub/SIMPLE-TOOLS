@@ -1,7 +1,8 @@
 package com.snackpub.prodocer;
 
-import com.snack.common.model.Order;
+import com.snackpub.common.model.Order;
 import com.snackpub.prodocer.direct.HelloSender;
+import com.snackpub.prodocer.header.HeaderSender;
 import com.snackpub.prodocer.topic.sender.RabbitSender;
 import com.snackpub.test.BladeBaseTest;
 import com.snackpub.test.BladeBootTest;
@@ -23,6 +24,9 @@ public class RabbitmqSpringcloudProducerApplicationTests extends BladeBaseTest {
     @Autowired
     private HelloSender helloSender;
 
+    @Autowired
+    private HeaderSender headerSender;
+
     private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 
     @Test
@@ -35,8 +39,11 @@ public class RabbitmqSpringcloudProducerApplicationTests extends BladeBaseTest {
 
     @Test
     public void testSender2() throws Exception {
-        Order order = new Order("001", "第一个订单");
-        rabbitSender.sendOrder(order);
+        for (int i = 0; i < 100; i++) {
+            Order order = new Order("00" + i, "第" + i + "个订单");
+            rabbitSender.sendOrder(order);
+        }
+
     }
 
     @SneakyThrows
@@ -65,6 +72,18 @@ public class RabbitmqSpringcloudProducerApplicationTests extends BladeBaseTest {
     public void testSender6() {
         helloSender.send2();
         System.err.println("推送成功！");
+    }
+
+
+    @SneakyThrows
+    @Test
+    public void testSenderHeader7() {
+        String message = "人生足别离是一种情愫";
+        Map<String, Object> bindingArgs = new HashMap<>();
+        bindingArgs.put("x-match", "any");
+        bindingArgs.put("headerName#1", "headerValue#1");
+        bindingArgs.put("headerName#2", "headerValue#2");
+        headerSender.execute(message, bindingArgs);
     }
 
 

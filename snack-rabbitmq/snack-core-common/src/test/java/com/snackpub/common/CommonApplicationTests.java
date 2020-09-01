@@ -1,4 +1,4 @@
-package com.snack.common;
+package com.snackpub.common;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

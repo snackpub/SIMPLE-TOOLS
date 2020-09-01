@@ -1,4 +1,4 @@
-package com.snack.common.model;
+package com.snackpub.common.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,6 +1,6 @@
 package com.snackpub.prodocer.topic.sender;
 
-import com.snack.common.model.Order;
+import com.snackpub.common.model.Order;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.rabbit.core.RabbitTemplate.ConfirmCallback;
@@ -22,26 +22,17 @@ public class RabbitSender {
    private RabbitTemplate rabbitTemplate;  
    
    //回调函数: confirm确认
-   final ConfirmCallback confirmCallback = new ConfirmCallback() {
-      @Override
-      public void confirm(CorrelationData correlationData, boolean ack, String cause) {
-         System.err.println("correlationData: " + correlationData);
-         System.err.println("ack: " + ack);
-         if(!ack){
-            System.err.println("异常处理....");
-         }
+   final ConfirmCallback confirmCallback = (correlationData, ack, cause) -> {
+      System.err.println("correlationData: " + correlationData);
+      System.err.println("ack: " + ack);
+      if(!ack){
+         System.err.println("异常处理....");
       }
    };
    
    //回调函数: return返回
-   final ReturnCallback returnCallback = new ReturnCallback() {
-      @Override
-      public void returnedMessage(org.springframework.amqp.core.Message message, int replyCode, String replyText,
-            String exchange, String routingKey) {
-         System.err.println("return exchange: " + exchange + ", routingKey: " 
-            + routingKey + ", replyCode: " + replyCode + ", replyText: " + replyText);
-      }
-   };
+   final ReturnCallback returnCallback = (message, replyCode, replyText, exchange, routingKey) -> System.err.println("return exchange: " + exchange + ", routingKey: "
+      + routingKey + ", replyCode: " + replyCode + ", replyText: " + replyText);
    
    //发送消息方法调用: 构建Message消息
    public void send(Object message, Map<String, Object> properties) throws Exception {
@@ -60,7 +51,7 @@ public class RabbitSender {
       rabbitTemplate.setReturnCallback(returnCallback);
       //id + 时间戳 全局唯一 
       CorrelationData correlationData = new CorrelationData("0987654321");
-      rabbitTemplate.convertAndSend("exchange-2", "1springboot.def123", order, correlationData);
+      rabbitTemplate.convertAndSend("exchange-2", "springboot.def", order, correlationData);
    }
    
 }
