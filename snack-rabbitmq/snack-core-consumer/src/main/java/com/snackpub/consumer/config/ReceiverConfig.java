@@ -61,7 +61,6 @@ public class ReceiverConfig {
         Map<String, Object> properties = new HashMap<>(3);
         // 定义死信时间，单位毫秒
         properties.put("x-message-ttl", 5 * 1000);
-        properties.put("x-message-ttl", 5 * 1000);
         // delay-ex 是这些死信要发送到交换器的名字
         properties.put("x-dead-letter-exchange", "delay-ex");
         // 死信在转发时携带的路由键名称

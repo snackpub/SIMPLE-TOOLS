@@ -86,5 +86,12 @@ public class RabbitmqSpringcloudProducerApplicationTests extends BladeBaseTest {
         headerSender.execute(message, bindingArgs);
     }
 
+    @SneakyThrows
+    @Test
+    public void testSenderNack8() {
+        String message = "人生足别离是一种情愫";
+        headerSender.execute2(message, new HashMap<>());
+    }
+
 
 }
