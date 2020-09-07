@@ -1,0 +1,22 @@
+#服务器端口
+server:
+  port: 8505
+
+#数据源配置
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/activitiDb?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true&allowPublicKeyRetrieval=true
+    username: root
+    password: snackpub
+#  # Zipkin
+#  zipkin:
+#    base-url: http://localhost:9411 # Zipkin服务器的地址,向zipkin-server上报调用信息
+#  sleuth:
+#    sampler:
+#      probability: 1.0 #将采样比例设置为1.0，也就是全部都需要。
+
+  # Activiti setting
+  activiti:
+    database-schema-update: 'true'  # 配置项可以设置流程引擎启动和关闭时数据库执行的策略 默认值 true
+    check-process-definitions: false # 关闭activiti自动部署（使用流程设计器部署，不使用具体文件访问方式）
+    history-level: full # 保存历史数据级别设置为full最高级别，便于历史数据的追溯 none、audit（默认值）、full
