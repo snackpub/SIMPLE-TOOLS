@@ -16,7 +16,11 @@ spring:
 #      probability: 1.0 #将采样比例设置为1.0，也就是全部都需要。
 
 
-# WX token
-wx.token.grant_type: client_credential
-wx.token.appid:
-wx.token.secret:
+# WX 配置
+wx:
+  sanck:
+    grant_type: client_credential
+    appid:
+    secret:
+    token: 37_7moNR99p9U57rnV2fK6-BT3PaWGIV8QOKiUp2q0eI1Mhlq-xzsKpsPhfNnvHaa6x3KSHz4hF4sF5COBhtgm7iTj9EHRrwDK40K8FLBqMOO4ePjoHh1fnu01rqkeGrxoKBImdnlW7v7UF3258KZSeAFACRK
+    menu_url: https://api.weixin.qq.com/cgi-bin/menu/create?access_token=

@@ -1,17 +1,18 @@
 package com.snackpub.core.wxlsjg.controller;
 
-import com.snackpub.core.wxlsjg.model.ImageMessage;
-import com.snackpub.core.wxlsjg.model.TextMessage;
-import com.snackpub.core.wxlsjg.model.TopicMessage;
+import com.snackpub.core.wxlsjg.model.message.ImageMessage;
+import com.snackpub.core.wxlsjg.model.message.TextMessage;
+import com.snackpub.core.wxlsjg.model.message.TopicMessage;
+import com.snackpub.core.wxlsjg.service.WxSnackpubService;
 import com.snackpub.core.wxlsjg.util.CheckUtil;
 import com.snackpub.core.wxlsjg.util.MessageUtil;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.awt.*;
 import java.io.PrintWriter;
 import java.util.Map;
 
@@ -23,6 +24,9 @@ import java.util.Map;
 @RestController
 @RequestMapping("/wx")
 public class WxSnackPubController {
+
+    @Autowired
+    private WxSnackpubService wxSnackpubService;
 
     @SneakyThrows
     @GetMapping("/wxt")
@@ -39,7 +43,7 @@ public class WxSnackPubController {
             out.print(echostr);
             out.close();
         } else {
-            log.info("非法请求");
+            log.info("非法请求，请注意！");
         }
     }
 
@@ -89,15 +93,30 @@ public class WxSnackPubController {
             topic.setMsgType("event");
             topic.setCreateTime(System.currentTimeMillis());
             if ("subscribe".equals(event)) {
+                message = MessageUtil.topicEventMessageToXml(topic);
                 log.info("订阅");
             } else if ("unsubscribe".equals(event)) {
+                message = MessageUtil.topicEventMessageToXml(topic);
                 log.info("取消订阅");
             }
-            message = MessageUtil.topicEventMessageToXml(topic);
+
+            // 点击菜单拉取消息时的事件推送
+            if ("CLICK".equals(event)) {
+                String eventKey = map.get("EventKey");
+                System.err.println("EventKey: "+eventKey);
+            }
+
             System.out.println(message);
         }
         // 将回应发送给微信服务器
         out.print(message);
         out.close();
     }
+
+    @GetMapping("/menu")
+    public void menuCreate(HttpServletRequest request, HttpServletResponse response) {
+        wxSnackpubService.menuCreate();
+    }
+
+
 }

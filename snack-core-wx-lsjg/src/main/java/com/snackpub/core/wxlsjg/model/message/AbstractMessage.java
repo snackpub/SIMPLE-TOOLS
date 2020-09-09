@@ -1,4 +1,4 @@
-package com.snackpub.core.wxlsjg.model;
+package com.snackpub.core.wxlsjg.model.message;
 
 import lombok.Data;
 import lombok.experimental.Accessors;

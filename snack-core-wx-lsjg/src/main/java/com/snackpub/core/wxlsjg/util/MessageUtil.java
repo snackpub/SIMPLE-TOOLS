@@ -1,8 +1,8 @@
 package com.snackpub.core.wxlsjg.util;
 
-import com.snackpub.core.wxlsjg.model.ImageMessage;
-import com.snackpub.core.wxlsjg.model.TextMessage;
-import com.snackpub.core.wxlsjg.model.TopicMessage;
+import com.snackpub.core.wxlsjg.model.message.ImageMessage;
+import com.snackpub.core.wxlsjg.model.message.TextMessage;
+import com.snackpub.core.wxlsjg.model.message.TopicMessage;
 import com.thoughtworks.xstream.XStream;
 import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
