@@ -31,6 +31,7 @@ public abstract class AbstractMessage implements Serializable {
      * 消息类型，文本为text
      */
     protected String MsgType;
+
     /**
      * 消息id，64位整型
      */

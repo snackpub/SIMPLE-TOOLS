@@ -17,5 +17,4 @@ import org.springframework.core.annotation.Order;
 @EnableConfigurationProperties({WxProperties.class})
 public class WxConfiguration {
 
-
 }

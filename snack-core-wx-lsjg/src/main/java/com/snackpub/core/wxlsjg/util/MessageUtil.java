@@ -1,9 +1,15 @@
 package com.snackpub.core.wxlsjg.util;
 
+import com.snackpub.core.wxlsjg.constant.MsgTypeConstant;
+import com.snackpub.core.wxlsjg.model.message.Image;
 import com.snackpub.core.wxlsjg.model.message.ImageMessage;
 import com.snackpub.core.wxlsjg.model.message.TextMessage;
 import com.snackpub.core.wxlsjg.model.message.TopicMessage;
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.core.util.QuickWriter;
+import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
+import com.thoughtworks.xstream.io.xml.PrettyPrintWriter;
+import com.thoughtworks.xstream.io.xml.XppDriver;
 import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
 import org.dom4j.Document;
@@ -12,6 +18,7 @@ import org.dom4j.io.SAXReader;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.InputStream;
+import java.io.Writer;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -61,16 +68,32 @@ public class MessageUtil {
     }
 
     /**
-     * 将文本消息对象转换成XML
+     * @param mediaId      图片消息媒体id
+     * @param toUserName   开发者微信号
+     * @param fromUserName 发送方帐号（一个OpenID）
+     * @return str
+     */
+    public static String initImageMessage(String mediaId, String toUserName, String fromUserName) {
+        ImageMessage image = new ImageMessage();
+        /*image.setPicUrl(picUrl);*/
+        image.setToUserName(toUserName);
+        image.setFromUserName(fromUserName);
+        image.setMsgType(MsgTypeConstant.RESP_MESSAGE_TYPE_IMAGE);
+        image.setCreateTime(System.currentTimeMillis());
+        image.setImage(new Image(mediaId));
+        return imageMessageToXml(image);
+    }
+
+    /**
+     * 将图片消息对象转换成XML
      *
      * @param imageMessage 图片消息对象
      * @return str
      */
     public String imageMessageToXml(ImageMessage imageMessage) {
         // 使用XStream将实体类的实例转换成xml格式
-        XStream xstream = new XStream();
-        xstream.alias("xml", imageMessage.getClass());
-        return xstream.toXML(imageMessage);
+        xStream.alias("xml", imageMessage.getClass());
+        return xStream.toXML(imageMessage);
     }
 
     /**
@@ -85,4 +108,34 @@ public class MessageUtil {
         xstream.alias("xml", topicMessage.getClass());
         return xstream.toXML(topicMessage);
     }
+
+
+    /**
+     * 扩展xstream，使其支持CDATA块
+     */
+    private static XStream xStream = new XStream(new XppDriver() {
+        @Override
+        public HierarchicalStreamWriter createWriter(Writer out) {
+            return new PrettyPrintWriter(out) {
+                // 对所有xml节点的转换都增加CDATA标记
+                boolean cdata = true;
+
+                @Override
+                public void startNode(String name, Class clazz) {
+                    super.startNode(name, clazz);
+                }
+
+                @Override
+                protected void writeText(QuickWriter writer, String text) {
+                    if (cdata) {
+                        writer.write("<![CDATA[");
+                        writer.write(text);
+                        writer.write("]]>");
+                    } else {
+                        writer.write(text);
+                    }
+                }
+            };
+        }
+    });
 }

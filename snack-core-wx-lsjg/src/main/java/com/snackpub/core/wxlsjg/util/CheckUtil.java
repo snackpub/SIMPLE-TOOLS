@@ -1,8 +1,8 @@
 package com.snackpub.core.wxlsjg.util;
 
 import lombok.experimental.UtilityClass;
-import org.apache.commons.lang.math.IntRange;
 
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.util.Arrays;
 import java.util.stream.IntStream;
@@ -41,7 +41,7 @@ public class CheckUtil {
         return temp.equals(signature);
     }
 
-    public String getSha1(String str) {
+    private String getSha1(String str) {
         if (str == null || str.length() == 0) {
             return null;
         }
@@ -49,13 +49,12 @@ public class CheckUtil {
                 'a', 'b', 'c', 'd', 'e', 'f'};
         try {
             MessageDigest mdTemp = MessageDigest.getInstance("SHA1");
-            mdTemp.update(str.getBytes("UTF-8"));
+            mdTemp.update(str.getBytes(StandardCharsets.UTF_8));
             byte[] md = mdTemp.digest();
             int j = md.length;
             char[] buf = new char[j * 2];
             int k = 0;
-            for (int i = 0; i < j; i++) {
-                byte byte0 = md[i];
+            for (byte byte0 : md) {
                 buf[k++] = hexDigits[byte0 >>> 4 & 0xf];
                 buf[k++] = hexDigits[byte0 & 0xf];
             }
@@ -67,8 +66,6 @@ public class CheckUtil {
     }
 
     public static void main(String[] args) {
-        IntStream.range(0, 10).forEach(i -> {
-            System.out.println(i);
-        });
+        IntStream.range(0, 10).forEach(System.out::println);
     }
 }

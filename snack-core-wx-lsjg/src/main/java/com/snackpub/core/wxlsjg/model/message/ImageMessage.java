@@ -22,10 +22,5 @@ public class ImageMessage extends AbstractMessage implements Serializable {
      */
     private String PicUrl;
 
-    /**
-     * 图片消息媒体id，可以调用获取临时素材接口拉取数据
-     */
-    private String MediaId;
-
-
+    private Image Image;
 }
