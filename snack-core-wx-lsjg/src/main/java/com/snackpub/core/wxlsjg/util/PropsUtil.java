@@ -2,7 +2,6 @@ package com.snackpub.core.wxlsjg.util;
 
 import lombok.experimental.UtilityClass;
 
-import java.util.Objects;
 
 /**
  * @author snackpub

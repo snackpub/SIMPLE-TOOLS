@@ -4,17 +4,12 @@ import com.alibaba.fastjson.JSONObject;
 import com.snackpub.core.wxlsjg.constant.GlobalConstant;
 import com.snackpub.core.wxlsjg.constant.MsgTypeConstant;
 import com.snackpub.core.wxlsjg.model.event.PicSysPhotoEvent;
-import com.snackpub.core.wxlsjg.model.message.Image;
-import com.snackpub.core.wxlsjg.model.message.ImageMessage;
 import com.snackpub.core.wxlsjg.model.message.TextMessage;
 import com.snackpub.core.wxlsjg.model.message.TopicMessage;
 import com.snackpub.core.wxlsjg.props.WxProperties;
-import com.snackpub.core.wxlsjg.service.WxMediaUploadService;
 import com.snackpub.core.wxlsjg.service.WxSnackpubService;
 import com.snackpub.core.wxlsjg.util.CheckUtil;
-import com.snackpub.core.wxlsjg.util.MediaUploadUtil;
 import com.snackpub.core.wxlsjg.util.MessageUtil;
-import com.snackpub.core.wxlsjg.util.TokenUtil;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -36,7 +31,6 @@ import java.util.Map;
 public class WxSnackPubController {
 
     private WxSnackpubService wxSnackpubService;
-    private WxProperties wxProperties;
 
     @SneakyThrows
     @GetMapping("/wxt")
@@ -85,7 +79,7 @@ public class WxSnackPubController {
             message = MessageUtil.textMessageToXml(text);
             System.err.println(message);
         } else if (MsgTypeConstant.RESP_MESSAGE_TYPE_IMAGE.equals(msgType)) {
-            String mediaId = /*map.get("MediaId")*/"9YLdMsa4U4PHGErwKy4yXXNHaRmFfqEqK_eXzDeZl7JpxZxY2lZ15aOk9b25uwpu";
+            String mediaId = "Sq1tAh8UTiCvGwDOAMOJ3rBG65B8Du8aToXAha04__hTtIfjvEX95VDQ4ieXIGfZ"/*map.get("MediaId")*/;
             // 图片链接（由系统生成）
             String picUrl = map.get("PicUrl");
             /*JSONObject jsonObject = MediaUploadUtil.addMaterialEver(picUrl + ".jpg", MsgTypeConstant.RESP_MESSAGE_TYPE_IMAGE, TokenUtil.getToken(wxProperties).getToken());
@@ -96,7 +90,7 @@ public class WxSnackPubController {
                     System.out.println("media_id:" + mediaId);
                 }
             }*/
-            message = MessageUtil.initImageMessage(mediaId, toUserName, fromUserName);
+            message = MessageUtil.initImageMessage(mediaId, fromUserName, toUserName);
             System.err.println(message);
         } else if (MsgTypeConstant.REQ_MESSAGE_TYPE_EVENT.equals(msgType)) {
             // 取消与订阅

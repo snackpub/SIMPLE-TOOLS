@@ -1,11 +1,9 @@
 package com.snackpub.core.wxlsjg.util;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
-import com.snackpub.core.tools.utils.SpringUtil;
 import com.snackpub.core.wxlsjg.Token;
-import com.snackpub.core.wxlsjg.props.WxProperties;
+import com.snackpub.core.wxlsjg.constant.SnackConstant;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,51 +23,21 @@ public class TokenUtil {
     /**
      * 获取Token凭证
      *
-     * @return
+     * @return token
      */
-    public Token getToken(WxProperties wxProperties) {
-        Token token = null;
-        String tokenUrl = wxProperties.getTokenUrl();
-        String appId = wxProperties.getAppid();
-        String appSecret = wxProperties.getSecret();
-        String grantType = wxProperties.getGrantType();
-
-        Map<String, String> param = new HashMap<>();
-        param.put("grant_type", grantType);
-        param.put("appid", appId);
-        param.put("secret", appSecret);
-        String url = HttpClientUtil.builderUrl(tokenUrl, param);
-
-        String respBody = HttpClientUtil.sendGet(url);
-
-        JSONObject jsonObject = JSONObject.parseObject(respBody);
-        if (jsonObject != null) {
-            try {
-                token = new Token()
-                        .setToken(jsonObject.getString("access_token"))
-                        .setExpire(jsonObject.getInteger("expires_in"));
-            } catch (JSONException e) {
-                token = null;
-                log.error("获取token失败 errcode:{} errmsg:{}", jsonObject.getInteger("errcode"), jsonObject.getString("errmsg"));
-            }
-        }
-        return token;
-    }
-
     public Token getToken() {
-        WxProperties wxProperties = SpringUtil.getBean("wxProperties", WxProperties.class);
         Token token = null;
-        String tokenUrl = wxProperties.getTokenUrl();
-        String appId = wxProperties.getAppid();
-        String appSecret = wxProperties.getSecret();
-        String grantType = wxProperties.getGrantType();
+        String grantType = PropsUtil.getPropsKey(SnackConstant.WX_PROPS_GRANT_TYPE);
+        String appId = PropsUtil.getPropsKey(SnackConstant.WX_PROPS_APPID);
+        String appSecret = PropsUtil.getPropsKey(SnackConstant.WX_PROPS_SECRET);
+        String tokenUrl = PropsUtil.getPropsKey(SnackConstant.WX_TOKEN_URL);
 
-        Map<String, String> param = new HashMap<>();
+        Map<String, String> param = new HashMap<>(3);
         param.put("grant_type", grantType);
         param.put("appid", appId);
         param.put("secret", appSecret);
-        String url = HttpClientUtil.builderUrl(tokenUrl, param);
 
+        String url = HttpClientUtil.builderUrl(tokenUrl, param);
         String respBody = HttpClientUtil.sendGet(url);
 
         JSONObject jsonObject = JSONObject.parseObject(respBody);
@@ -79,12 +47,9 @@ public class TokenUtil {
                         .setToken(jsonObject.getString("access_token"))
                         .setExpire(jsonObject.getInteger("expires_in"));
             } catch (JSONException e) {
-                token = null;
                 log.error("获取token失败 errcode:{} errmsg:{}", jsonObject.getInteger("errcode"), jsonObject.getString("errmsg"));
             }
         }
         return token;
     }
-
-
 }

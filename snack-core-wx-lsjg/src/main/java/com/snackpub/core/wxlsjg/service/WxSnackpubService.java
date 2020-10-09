@@ -4,19 +4,19 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.snackpub.core.wxlsjg.Token;
+import com.snackpub.core.wxlsjg.constant.SnackConstant;
 import com.snackpub.core.wxlsjg.model.matchrule.MatchruleModel;
 import com.snackpub.core.wxlsjg.model.menu.ClickButton;
 import com.snackpub.core.wxlsjg.model.menu.ViewButton;
-import com.snackpub.core.wxlsjg.props.WxProperties;
 import com.snackpub.core.wxlsjg.util.HttpClientUtil;
+import com.snackpub.core.wxlsjg.util.PropsUtil;
 import com.snackpub.core.wxlsjg.util.TokenUtil;
 import lombok.SneakyThrows;
 import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.RequestEntity;
 import org.apache.commons.httpclient.methods.StringRequestEntity;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -25,15 +25,6 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class WxSnackpubService {
-
-
-    private WxProperties wxProperties;
-
-    @Autowired
-    public WxSnackpubService(WxProperties wxProperties) {
-        this.wxProperties = wxProperties;
-    }
-
 
     @SneakyThrows
     public void menuCreate() {
@@ -64,9 +55,9 @@ public class WxSnackpubService {
         String menuData = JSON.toJSONString(menuJson, SerializerFeature.DisableCircularReferenceDetect);
         System.err.println(menuData);
 
-        String token =/* wxProperties.getToken()*/"";
+        String token = TokenUtil.getToken().getToken();
 
-        String url = wxProperties.getMenuCreate() + token;
+        String url = PropsUtil.getPropsKey(SnackConstant.WX_MENU_CREATE) + token;
         HttpClient hc = new HttpClient();
         PostMethod pm = new PostMethod(url);
         RequestEntity re = new StringRequestEntity(menuData, "application/json", "UTF-8");
@@ -78,8 +69,8 @@ public class WxSnackpubService {
 
 
     public void menuSelect() {
-        String token =/* wxProperties.getToken()*/"";
-        String url = wxProperties.getMenuSelect() + token;
+        String token = TokenUtil.getToken().getToken();
+        String url = PropsUtil.getPropsKey(SnackConstant.WX_MENU_SELECT) + token;
         String respBody = HttpClientUtil.sendGet(url);
         System.err.println(respBody);
     }
@@ -129,7 +120,7 @@ public class WxSnackpubService {
         // 禁用循环引用发现
         String menuData = JSON.toJSONString(menuJson, SerializerFeature.DisableCircularReferenceDetect);
 
-        String token = TokenUtil.getToken(wxProperties).getToken()/*wxProperties.getToken()*/;
+        String token = TokenUtil.getToken().getToken()/*wxProperties.getToken()*/;
         String url = /*wxProperties.getMenuCreate()*/"https://api.weixin.qq.com/cgi-bin/menu/addconditional?access_token=" + token;
         String respBody = HttpClientUtil.sendPost(url, menuData);
         System.err.println(respBody);

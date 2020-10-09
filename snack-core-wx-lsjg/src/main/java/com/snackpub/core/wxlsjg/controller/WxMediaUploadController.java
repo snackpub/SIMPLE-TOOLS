@@ -60,7 +60,7 @@ public class WxMediaUploadController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        MediaUploadUtil.addMaterialEver(f.getAbsolutePath(), MsgTypeConstant.RESP_MESSAGE_TYPE_IMAGE, TokenUtil.getToken(wxProperties).getToken());
+        MediaUploadUtil.addMaterialEver(f.getAbsolutePath(), MsgTypeConstant.RESP_MESSAGE_TYPE_IMAGE, TokenUtil.getToken().getToken());
         // 输出file的URL
         System.out.println(f.toURI().toURL().toString());
         // 输出文件的绝对路径

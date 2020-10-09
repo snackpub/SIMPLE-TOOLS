@@ -26,12 +26,11 @@ public class MediaUploadUtil {
      * @return
      * @throws Exception
      */
-
     public static JSONObject addMaterialEver(String fileUrl, String type, String token) throws IOException {
         String mediaUrl = PropsUtil.getPropsKey("wx.sanck.media_url");
         File file = new File(fileUrl);
         //上传素材
-        String path = mediaUrl/*"https://api.weixin.qq.com/cgi-bin/material/add_material"*/ + "?access_token=" + token + "&type=" + type;
+        String path = /*mediaUrl*/"https://api.weixin.qq.com/cgi-bin/media/upload" + "?access_token=" + token + "&type=" + type;
         String result = connectHttpsByPost(path, null, file);
         result = result.replaceAll("[\\\\]", "");
         log.info("result:" + result);
@@ -115,7 +114,7 @@ public class MediaUploadUtil {
     public static void main(String[] args) {
         try {
             //获得Access_token的方法，请自行百度
-            String token = "38_cd2gK4gMRpBMxDCcwTq3PSzIUhw8ULePnASIhpMudtX0h8jMRB68UJ4gGIq7vRLmlrA1CNy9pS0E4orDw-B21ozInnvjfm58I6PB2wjpji5OyGLXdAhSbDXAWTi4sSTQHX8RPCgaCreAD2WrYEOeAAAIOY";
+            String token = "38__YDLfbCmEZ2i8U6foatBF6MZQ-WCQZSWCuffxIo8sxIzDTk4bj2TA1jHj3RAOoJN-RzgnL27Oj5UDlFeJC0FhPruvbxJMRncsszUS9VvsAKfGnLMSOCvoZ7VCmwQJZzL-Fx4FHF_z2CkapuINVLbAJACKA";
             String path = "E:\\学习文档\\域名备案资料\\TIM图片20180911130437.jpg";
             JSONObject object = addMaterialEver(path, "image", token);
             assert object != null;

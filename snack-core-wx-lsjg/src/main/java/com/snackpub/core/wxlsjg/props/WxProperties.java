@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
  * @date 2020/9/9
  */
 @Component
-@ConfigurationProperties("wx.sanck")
+@ConfigurationProperties("wx.snack")
 @PropertySource("classpath:wxApplication.properties")
 public class WxProperties {
 

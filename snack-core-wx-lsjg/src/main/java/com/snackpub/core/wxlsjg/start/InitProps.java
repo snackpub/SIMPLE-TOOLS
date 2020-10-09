@@ -26,7 +26,7 @@ public class InitProps {
 
 
     /**
-     * 保存.properties 文件的数据到系统一份
+     * 保存.properties 文件的数据复制到系统一份
      *
      * @param propertiesFileName 属性文件名称
      * @throws IOException 读流异常
