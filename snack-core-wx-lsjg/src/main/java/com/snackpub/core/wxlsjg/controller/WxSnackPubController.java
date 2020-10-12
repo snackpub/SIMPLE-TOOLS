@@ -61,7 +61,6 @@ public class WxSnackPubController {
         String toUserName = map.get("ToUserName");
         String fromUserName = map.get("FromUserName");
         String msgType = map.get("MsgType");
-        String content = map.get("Content");
         String createTime = map.get("CreateTime");
 
         String msgId = map.get("MsgId");
@@ -69,7 +68,23 @@ public class WxSnackPubController {
         String message = null;
         // 对文本消息进行处理
         if (MsgTypeConstant.RESP_MESSAGE_TYPE_TEXT.equals(msgType)) {
-            TextMessage text = new TextMessage();
+            String content = map.get("Content");
+            switch (content) {
+                case "1":
+                    message = MessageUtil.initImageMessage("7YaTmOxDZ6P6P1_mc_UBNME1q1z6iB11Wt66H1h_i1CglX2Kto5AnLh4GtpS4j3z",
+                            fromUserName, toUserName);
+                    break;
+                case "2":
+                    message = MessageUtil.initImageMessage("Q3mN0wS2RhE8Dxf0fuRU9W9k78UDQHTLzYjCbPY4IbV7dxGvr3wMDWN3uWixJa84",
+                            fromUserName, toUserName);
+                    break;
+                case "3":
+                    message = MessageUtil.initImageMessage("zHTU57vpjAmlFeM5yLMrRmAdHU4XHrHh88hKabjG_MyctjbuwuufChtPVSZAthIr",
+                            fromUserName, toUserName);
+                    break;
+            }
+
+           /* TextMessage text = new TextMessage();
             // 发送和回复是反向的
             text.setFromUserName(toUserName);
             text.setToUserName(fromUserName);
@@ -77,7 +92,7 @@ public class WxSnackPubController {
             text.setCreateTime(System.currentTimeMillis());
             text.setContent("你发送的消息是：" + content);
             message = MessageUtil.textMessageToXml(text);
-            System.err.println(message);
+            System.err.println(message);*/
         } else if (MsgTypeConstant.RESP_MESSAGE_TYPE_IMAGE.equals(msgType)) {
             String mediaId = "Sq1tAh8UTiCvGwDOAMOJ3rBG65B8Du8aToXAha04__hTtIfjvEX95VDQ4ieXIGfZ"/*map.get("MediaId")*/;
             // 图片链接（由系统生成）
@@ -101,7 +116,18 @@ public class WxSnackPubController {
             topic.setMsgType("event");
             topic.setCreateTime(System.currentTimeMillis());
             if (MsgTypeConstant.EVENT_TYPE_SUBSCRIBE.equals(event)) {
-                message = MessageUtil.topicEventMessageToXml(topic);
+                // message = MessageUtil.topicEventMessageToXml(topic);
+                TextMessage text = new TextMessage();
+                // 发送和回复是反向的
+                text.setFromUserName(toUserName);
+                text.setToUserName(fromUserName);
+                text.setMsgType(MsgTypeConstant.RESP_MESSAGE_TYPE_TEXT);
+                text.setCreateTime(System.currentTimeMillis());
+                text.setContent("欢迎关注零食酒馆！" +
+                        "\n回复1：看中国美女" +
+                        "\n回复2：看日本美女" +
+                        "\n回复3：看韩国美女");
+                message = MessageUtil.textMessageToXml(text);
                 log.info("订阅");
             } else if (MsgTypeConstant.EVENT_TYPE_UNSUBSCRIBE.equals(event)) {
                 message = MessageUtil.topicEventMessageToXml(topic);
